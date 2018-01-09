@@ -30,9 +30,7 @@ class ExampleSpider(scrapy.Spider):
                 item['link'] = a.css('a::attr(href)').extract_first()
                 next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
                 if next_page is not None:
-                    #print "next_page_link:" + next_page
                     yield scrapy.Request(next_page, meta={'key':item},callback=self.auth_parse,dont_filter=True)
-                #yield item
             else:
                 item['link'] = ''
                 item['auth_url']=''
@@ -47,9 +45,6 @@ class ExampleSpider(scrapy.Spider):
     def auth_parse(self,response):
         item = response.meta['key']
         item['auth_url'] = response.url
-
-        #print 'auth_url' + response.url
-
         item['auth_name'] = response.css('a.fz14.blue1::text').extract_first()
         if response.css('div.btn__text-wrap::text') :
             item['cartoon_name'] = trim(response.css('div.btn__text-wrap::text')[3].extract())
