@@ -13,7 +13,7 @@ class ExampleSpider(scrapy.Spider):
     allowed_domains = ['bcy.net']
     now = datetime.datetime.now()
     start_urls = []
-    for i in range(0,1):
+    for i in range(0,844):
         now = datetime.datetime.now()
         delta = datetime.timedelta(days=i)
         n_days = now - delta
@@ -26,6 +26,7 @@ class ExampleSpider(scrapy.Spider):
             item['rank'] = a.css('span::text').extract_first()
             item['url'] = response.url
             item['title'] = a.css('a::attr(title)').extract_first()
+	    item['date'] = response.url[-8:]
             if a.css('a::attr(href)').extract_first():
                 item['link'] = a.css('a::attr(href)').extract_first()
                 next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
@@ -47,9 +48,9 @@ class ExampleSpider(scrapy.Spider):
         item['auth_url'] = response.url
         item['auth_name'] = response.css('a.fz14.blue1::text').extract_first()
         if response.css('div.btn__text-wrap::text') :
-            item['cartoon_name'] = trim(response.css('div.btn__text-wrap::text')[3].extract())
-            item['following'] = trim(response.css('a.vhr__item.minor::text').extract_first()[10:])
-            item['follower'] = trim(response.css('a.tal.vhr__item.vhr__item--last.minor::text').extract_first()[10:])
+            item['cartoon_name'] = response.css('div.btn__text-wrap::text')[3].extract().strip()
+            item['following'] = response.css('a.vhr__item.minor::text').extract_first()[10:].strip()
+            item['follower'] = response.css('a.tal.vhr__item.vhr__item--last.minor::text').extract_first()[10:].strip()
         else:
             item['cartoon_name'] = ''
             item['following'] = ''
