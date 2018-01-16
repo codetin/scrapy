@@ -5,13 +5,19 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 import scrapy
 import datetime
-from bcy.items import BcyItem
+#from scrapy.linkextractors import LinkExtractor
+#from scrapy.spiders import Rule
+from scrapy_redis.spiders import RedisSpider
+from bcy_redis.items import BcyRedisItem 
+import re
 
-class ExampleSpider(scrapy.Spider):
+class RedisSpider(RedisSpider):
     #fileobj = open('out.txt','w+')
-    name = 'top100'
+    name = 'top100_redis'
     allowed_domains = ['bcy.net']
+    redis_key = 'RedisSpider:start_urls'
     now = datetime.datetime.now()
+    '''
     start_urls = []
     for i in range(0,1):
         now = datetime.datetime.now()
@@ -20,13 +26,14 @@ class ExampleSpider(scrapy.Spider):
         #print n_days.strftime('%Y%m%d')
         start_urls.append('https://bcy.net/coser/toppost100?type=week&date='+n_days.strftime('%Y%m%d'))
         #print repr(start_urls)
+    '''
     def parse(self, response):
         for a in response.css('li.l-work-thumbnail'):
-            item = BcyItem()
+            item = BcyRedisItem()
             item['rank'] = a.css('span::text').extract_first()
             item['url'] = response.url
             item['title'] = a.css('a::attr(title)').extract_first()
-	    item['date'] = response.url[-8:]
+            item['date'] = response.url[-8:]
             if a.css('a::attr(href)').extract_first():
                 item['link'] = a.css('a::attr(href)').extract_first()
                 next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
@@ -41,7 +48,7 @@ class ExampleSpider(scrapy.Spider):
                 item['follower'] = ''
                 yield item
 
-                
+
 
     def auth_parse(self,response):
         item = response.meta['key']
@@ -56,3 +63,4 @@ class ExampleSpider(scrapy.Spider):
             item['following'] = ''
             item['follower'] = ''
         yield item
+
