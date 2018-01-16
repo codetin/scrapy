@@ -85,7 +85,7 @@ ITEM_PIPELINES = {
 }
 
 # 指定redis主机
-REDIS_HOST='127.0.0.1'
+REDIS_HOST='10.154.21.83'
 REDIS_PORT=6379
 
 # Enable and configure the AutoThrottle extension (disabled by default)
