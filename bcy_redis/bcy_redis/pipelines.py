@@ -7,7 +7,7 @@
 import pymysql
 def dbHandle():
     conn = pymysql.connect(
-        host = "localhost",
+        host = "10.154.21.83",
         user = "root",
         passwd = "capcom",
         charset = "utf8",
