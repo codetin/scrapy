@@ -21,5 +21,5 @@ class BcyRedisItem(scrapy.Item):
     cartoon_name = scrapy.Field()
     following = scrapy.Field()
     follower = scrapy.Field()
-
+    location = scrapy.Field()
     pass

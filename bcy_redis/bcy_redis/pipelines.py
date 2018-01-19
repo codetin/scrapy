@@ -21,10 +21,10 @@ class BcyRedisPipeline(object):
         dbObject = dbHandle()
         cursor = dbObject.cursor()
         cursor.execute("USE bcy")
-        sql = "INSERT INTO top_redis(rank,url,date,link,title,auth_url,auth_name,cartoon_name,following,follower) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        sql = "INSERT INTO top_redis(location,rank,url,date,link,title,auth_url,auth_name,cartoon_name,following,follower) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
         print repr(item)
         try:
-            cursor.execute(sql,(item['rank'],item['url'],item['date'],item['link'],item['title'],item['auth_url'],item['auth_name'],item['cartoon_name'],item['following'],item['follower']))
+            cursor.execute(sql,(item['location'],item['rank'],item['url'],item['date'],item['link'],item['title'],item['auth_url'],item['auth_name'],item['cartoon_name'],item['following'],item['follower']))
             cursor.connection.commit()
         except BaseException as e:
             print("mysql insert error>>>>>>>>>>>>>",e,"<<<<<<<<<<<<<error message")

@@ -1,0 +1,99 @@
+./top100.sh: line 3: syntax error near unexpected token `<<<'
+./top100.sh: line 3: `<<<<<<< Updated upstream'
+./top100.sh: line 3: syntax error near unexpected token `<<<'
+./top100.sh: line 3: `<<<<<<< Updated upstream'
+Traceback (most recent call last):
+  File "/usr/local/bin/scrapy", line 7, in <module>
+    from scrapy.cmdline import execute
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 9, in <module>
+    from scrapy.crawler import CrawlerProcess
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/crawler.py", line 7, in <module>
+    from twisted.internet import reactor, defer
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/reactor.py", line 38, in <module>
+    from twisted.internet import default
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/default.py", line 56, in <module>
+    install = _getInstallFunction(platform)
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/default.py", line 44, in _getInstallFunction
+    from twisted.internet.epollreactor import install
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/epollreactor.py", line 24, in <module>
+    from twisted.internet import posixbase
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/posixbase.py", line 18, in <module>
+    from twisted.internet import error, udp, tcp
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/tcp.py", line 28, in <module>
+    from twisted.internet._newtls import (
+  File "/usr/local/lib/python2.7/dist-packages/twisted/internet/_newtls.py", line 21, in <module>
+    from twisted.protocols.tls import TLSMemoryBIOFactory, TLSMemoryBIOProtocol
+  File "/usr/local/lib/python2.7/dist-packages/twisted/protocols/tls.py", line 41, in <module>
+    from OpenSSL.SSL import Error, ZeroReturnError, WantReadError
+  File "/usr/local/lib/python2.7/dist-packages/OpenSSL/__init__.py", line 8, in <module>
+    from OpenSSL import crypto, SSL
+  File "/usr/local/lib/python2.7/dist-packages/OpenSSL/crypto.py", line 12, in <module>
+    from cryptography import x509
+  File "/usr/local/lib/python2.7/dist-packages/cryptography/x509/__init__.py", line 8, in <module>
+    from cryptography.x509.base import (
+  File "/usr/local/lib/python2.7/dist-packages/cryptography/x509/base.py", line 16, in <module>
+    from cryptography.x509.extensions import Extension, ExtensionType
+  File "/usr/local/lib/python2.7/dist-packages/cryptography/x509/extensions.py", line 24, in <module>
+    from cryptography.x509.general_name import GeneralName, IPAddress, OtherName
+  File "/usr/local/lib/python2.7/dist-packages/cryptography/x509/general_name.py", line 12, in <module>
+    import idna
+  File "/usr/local/lib/python2.7/dist-packages/idna/__init__.py", line 2, in <module>
+    from .core import *
+  File "/usr/local/lib/python2.7/dist-packages/idna/core.py", line 2, in <module>
+    import bisect
+  File "/usr/lib/python2.7/bisect.py", line 1, in <module>
+    """Bisection algorithms."""
+KeyboardInterrupt
+2018-01-19 16:53:14 [scrapy.utils.log] INFO: Scrapy 1.5.0 started (bot: bcy_redis)
+2018-01-19 16:53:14 [scrapy.utils.log] INFO: Versions: lxml 4.1.1.0, libxml2 2.9.7, cssselect 1.0.3, parsel 1.3.1, w3lib 1.18.0, Twisted 17.9.0, Python 2.7.12 (default, Nov 20 2017, 18:23:56) - [GCC 5.4.0 20160609], pyOpenSSL 17.5.0 (OpenSSL 1.1.0g  2 Nov 2017), cryptography 2.1.4, Platform Linux-4.4.0-91-generic-x86_64-with-Ubuntu-16.04-xenial
+2018-01-19 16:53:14 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'bcy_redis.spiders', 'ROBOTSTXT_OBEY': True, 'DUPEFILTER_CLASS': 'scrapy_redis.dupefilter.RFPDupeFilter', 'SPIDER_MODULES': ['bcy_redis.spiders'], 'BOT_NAME': 'bcy_redis', 'USER_AGENT': 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 'SCHEDULER': 'scrapy_redis.scheduler.Scheduler'}
+2018-01-19 16:53:14 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2018-01-19 16:53:14 [top100_redis] INFO: Reading start URLs from redis key 'RedisSpider:start_urls' (batch size: 16, encoding: utf-8
+2018-01-19 16:53:15 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2018-01-19 16:53:15 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2018-01-19 16:53:15 [scrapy.middleware] INFO: Enabled item pipelines:
+['bcy_redis.pipelines.BcyRedisPipeline']
+2018-01-19 16:53:15 [scrapy.core.engine] INFO: Spider opened
+2018-01-19 16:53:15 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2018-01-19 16:53:15 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
+2018-01-19 16:53:40 [top100_redis] DEBUG: Read 1 requests from 'RedisSpider:start_urls'
+2018-01-19 16:53:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://bcy.net/robots.txt> (referer: None)
+2018-01-19 16:53:40 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://bcy.net/coser/toppost100?type=week&date=20180119> (referer: None)
+2018-01-19 16:53:41 [scrapy.core.scraper] ERROR: Spider error processing <GET https://bcy.net/coser/toppost100?type=week&date=20180119> (referer: None)
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/utils/defer.py", line 102, in iter_errback
+    yield next(it)
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermiddlewares/offsite.py", line 30, in process_spider_output
+    for x in result:
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermiddlewares/referer.py", line 339, in <genexpr>
+    return (_set_referer(r) for r in result or ())
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermiddlewares/urllength.py", line 37, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermiddlewares/depth.py", line 58, in <genexpr>
+    return (r for r in result or () if _filter(r))
+  File "/root/scrapy/bcy_redis/bcy_redis/spiders/top100_redis.py", line 34, in parse
+    item['url'] = a.css('a::attr(href)')[3].extract_first()
+AttributeError: 'Selector' object has no attribute 'extract_first'
+2018-01-19 16:54:15 [scrapy.extensions.logstats] INFO: Crawled 2 pages (at 2 pages/min), scraped 0 items (at 0 items/min)
+./top100.sh: line 3: 32531 Killed                  scrapy crawl top100_redis
