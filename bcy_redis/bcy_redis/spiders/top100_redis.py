@@ -31,7 +31,7 @@ class RedisSpider(RedisSpider):
         for a in response.css('li.l-work-thumbnail'):
             item = BcyRedisItem()
             item['rank'] = a.css('span::text').extract_first()
-            item['url'] = response.url
+            item['url'] = a.css('a::attr(href)')[3].extract_first()
             item['title'] = a.css('a::attr(title)').extract_first()
             item['date'] = response.url[-8:]
             if a.css('a::attr(href)').extract_first():
