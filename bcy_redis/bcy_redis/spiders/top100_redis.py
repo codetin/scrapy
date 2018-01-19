@@ -17,30 +17,21 @@ class RedisSpider(RedisSpider):
     allowed_domains = ['bcy.net']
     redis_key = 'RedisSpider:start_urls'
     now = datetime.datetime.now()
-    '''
-    start_urls = []
-    for i in range(0,1):
-        now = datetime.datetime.now()
-        delta = datetime.timedelta(days=i)
-        n_days = now - delta
-        #print n_days.strftime('%Y%m%d')
-        start_urls.append('https://bcy.net/coser/toppost100?type=week&date='+n_days.strftime('%Y%m%d'))
-        #print repr(start_urls)
-    '''
     def parse(self, response):
         for a in response.css('li.l-work-thumbnail'):
             item = BcyRedisItem()
             item['rank'] = a.css('span::text').extract_first()
-            item['url'] = 'https://bcy.net'+a.css('a::attr(href)').extract()[3]
             item['title'] = a.css('a::attr(title)').extract_first()
             item['date'] = response.url[-8:]
             if a.css('a::attr(href)').extract_first():
+                item['url'] = 'https://bcy.net'+a.css('a::attr(href)').extract()[3]
                 item['link'] = a.css('a::attr(href)').extract_first()
                 next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
                 if next_page is not None:
                     yield scrapy.Request(next_page, meta={'key':item},callback=self.ablum_parse,dont_filter=True)
             else:
                 item['location']=''
+                item['url']=''
                 item['link'] = ''
                 item['auth_url']=''
                 item['auth_name']=''
