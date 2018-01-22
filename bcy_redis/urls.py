@@ -10,7 +10,7 @@ import redis
 r = redis.Redis(host='127.0.0.1', port=16379,db=0)
 
 #start_urls = []
-for i in range(0,851):
+for i in range(0,1):
     now = datetime.datetime.now()
     delta = datetime.timedelta(days=i)
     n_days = now - delta

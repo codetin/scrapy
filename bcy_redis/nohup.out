@@ -1,1 +1,0 @@
-./top100.sh: line 3:  2759 Killed                  scrapy crawl top100_redis
