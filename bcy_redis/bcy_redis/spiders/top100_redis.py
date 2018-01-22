@@ -59,7 +59,13 @@ class RedisSpider(RedisSpider):
 
     def auth_parse(self,response):
         item = response.meta['key']
-        item['location'] = response.css('span.fz14::text').extract_first()
+        locate = response.css('span.fz14::text').extract_first()
+        locate_list = []
+        locate_list = locate.split()
+        item['state']=locate_list[0]
+        item['city']=''
+        if len(locate_list) >=2:
+            item['city']=locate_list[1]
         yield item
 
 
