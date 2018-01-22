@@ -30,7 +30,8 @@ class RedisSpider(RedisSpider):
                 if next_page is not None:
                     yield scrapy.Request(next_page, meta={'key':item},callback=self.ablum_parse,dont_filter=True)
             else:
-                item['location']=''
+                item['state']=''
+                item['city']=''
                 item['url']=''
                 item['link'] = ''
                 item['auth_url']=''
