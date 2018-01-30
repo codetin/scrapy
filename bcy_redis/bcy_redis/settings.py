@@ -85,7 +85,7 @@ ITEM_PIPELINES = {
 }
 
 # 指定redis主机
-REDIS_HOST='10.154.21.83'
+REDIS_HOST='databro.cn'
 REDIS_PORT=16379
 
 # Enable and configure the AutoThrottle extension (disabled by default)

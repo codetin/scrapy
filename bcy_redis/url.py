@@ -7,7 +7,7 @@ sys.setdefaultencoding('utf-8')
 import datetime
 import redis
 from sys import argv 
-r = redis.Redis(host='127.0.0.1', port=16379,db=0)
+r = redis.Redis(host='databro.cn', port=16379,db=0)
 
 #start_urls = []
 for i in range(0,int(argv[1])):
