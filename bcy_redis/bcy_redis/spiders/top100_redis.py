@@ -18,13 +18,13 @@ class RedisSpider(RedisSpider):
     redis_key = 'RedisSpider:start_urls'
     now = datetime.datetime.now()
     def parse(self, response):
-        for a in response.css('li.l-work-thumbnail'):
+        for a in response.css('li._box'):
             item = BcyRedisItem()
             item['rank'] = a.css('span::text').extract_first()
             item['title'] = a.css('a::attr(title)').extract_first()
             item['date'] = response.url[-8:]
             if a.css('a::attr(href)').extract_first():
-                item['url'] = 'https://bcy.net'+a.css('a::attr(href)').extract()[3]
+                item['url'] = 'https://bcy.net'+a.css('a::attr(href)').extract()[2]
                 item['link'] = a.css('a::attr(href)').extract_first()
                 next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
                 if next_page is not None:
@@ -47,9 +47,9 @@ class RedisSpider(RedisSpider):
         item = response.meta['key']
         item['auth_url'] = response.url
         print item['auth_url']
-        item['auth_name'] = response.css('a.fz14.blue1::text').extract_first()
-        if response.css('div.btn__text-wrap::text') :
-            item['cartoon_name'] = response.css('div.btn__text-wrap::text')[3].extract().strip()
+        item['auth_name'] = response.css('a.fz14.dib.maxw250.cut::text').extract_first()
+        if response.css('a._tag._tag--normal.cut.db::text') :
+            item['cartoon_name'] = response.css('a._tag._tag--normal.cut.db::text').extract()[1].strip()
             item['following'] = response.css('a.vhr__item.minor::text').extract_first()[10:].strip()
             item['follower'] = response.css('a.tal.vhr__item.vhr__item--last.minor::text').extract_first()[10:].strip()
         else:
@@ -60,6 +60,7 @@ class RedisSpider(RedisSpider):
 
     def auth_parse(self,response):
         item = response.meta['key']
+        '''
         locate = response.css('span.fz14::text').extract_first()
         locate_list = []
         locate_list = locate.split()
@@ -67,6 +68,9 @@ class RedisSpider(RedisSpider):
         item['city']=''
         if len(locate_list) >=2:
             item['city']=locate_list[1]
+        '''
+        item['state']=''
+        item['city']=''
         yield item
 
 
