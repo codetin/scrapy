@@ -19,7 +19,9 @@ class BcyItem(scrapy.Item):
     auth_name = scrapy.Field()
     auth_url = scrapy.Field()
     cartoon_name = scrapy.Field()
-    following = scrapy.Field() 
+    following = scrapy.Field()
     follower = scrapy.Field()
+    state = scrapy.Field()
+    city = scrapy.Field()
 
     pass

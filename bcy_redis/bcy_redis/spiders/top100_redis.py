@@ -17,10 +17,22 @@ class RedisSpider(RedisSpider):
     allowed_domains = ['bcy.net']
     redis_key = 'RedisSpider:start_urls'
     now = datetime.datetime.now()
-
-
-
+    '''
+    yield scrapy.FormRequest(
+            url = 'https://bcy.net/coser/index/ajaxloadtoppost',
+            formdata = {"p" : "1", "type" : "week"},
+            callback = self.parse
+        )
+    '''
     def parse(self, response):
+        request_date = str(response.url)[-8:]
+        
+        for i in range(1,4):
+            yield scrapy.FormRequest(
+                url = 'https://bcy.net/coser/index/ajaxloadtoppost?date='+request_date,
+                formdata = {"p" : str(i), "type" : u"week", "date":request_date},
+                callback = self.form_parse,dont_filter=True)
+        
         for a in response.css('li._box'):
             item = BcyRedisItem()
             item['rank'] = a.css('span::text').extract_first()
@@ -44,6 +56,29 @@ class RedisSpider(RedisSpider):
                 item['follower'] = ''
                 yield item
 
+    def form_parse(self, response):
+        for a in response.css('li._box'):
+            item = BcyRedisItem()
+            item['rank'] = a.css('span::text').extract_first()
+            item['title'] = a.css('a::attr(title)').extract_first()
+            item['date'] = response.url[-8:]
+            if a.css('a::attr(href)').extract_first():
+                item['url'] = 'https://bcy.net'+a.css('a::attr(href)').extract()[2]
+                item['link'] = a.css('a::attr(href)').extract_first()
+                next_page = 'https://bcy.net' + a.css('a::attr(href)').extract_first()
+                if next_page is not None:
+                    yield scrapy.Request(next_page, meta={'key':item},callback=self.ablum_parse,dont_filter=True)
+            else:
+                item['state']=''
+                item['city']=''
+                item['url']=''
+                item['link'] = ''
+                item['auth_url']=''
+                item['auth_name']=''
+                item['cartoon_name'] = ''
+                item['following'] = ''
+                item['follower'] = ''
+                yield item
 
 
     def ablum_parse(self,response):
@@ -75,8 +110,9 @@ class RedisSpider(RedisSpider):
         if len(locate_list) >=2:
             item['city']=locate_list[1]
         
-        #item['state']=''
-        #item['city']=''
+        print '>>>>>>>>>>==========RANK========='
+        print item['rank']
+        print '>>>>>>>>>>==========END========='
         yield item
 
 

@@ -22,7 +22,9 @@ class BcyRedisPipeline(object):
         cursor = dbObject.cursor()
         cursor.execute("USE bcy")
         sql = "INSERT INTO top_redis(state,city,rank,url,date,link,title,auth_url,auth_name,cartoon_name,following,follower) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        print '>==============insert===========item'
         print repr(item)
+        print '>==============insert===========item'
         try:
             cursor.execute(sql,(item['state'],item['city'],item['rank'],item['url'],item['date'],item['link'],item['title'],item['auth_url'],item['auth_name'],item['cartoon_name'],item['following'],item['follower']))
             cursor.connection.commit()
