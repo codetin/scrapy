@@ -17,6 +17,9 @@ class RedisSpider(RedisSpider):
     allowed_domains = ['bcy.net']
     redis_key = 'RedisSpider:start_urls'
     now = datetime.datetime.now()
+
+
+
     def parse(self, response):
         for a in response.css('li._box'):
             item = BcyRedisItem()
@@ -60,17 +63,20 @@ class RedisSpider(RedisSpider):
 
     def auth_parse(self,response):
         item = response.meta['key']
-        '''
-        locate = response.css('span.fz14::text').extract_first()
+        b = response.xpath('//script[@id="tpl-profile-body"]')
+        locate = re.findall(r'<p class="text fz14 lh1d4 mb15">(.+?)</p>',str(b.extract_first()))[1].decode() 
+        #print locate
+        #re.findall(r'<p class="text fz14 lh1d4 mb15">(.+?)</p>',str(b.extract()).decode())[1] 
+        #locate = response.css('span.fz14::text').extract_first()
         locate_list = []
         locate_list = locate.split()
         item['state']=locate_list[0]
         item['city']=''
         if len(locate_list) >=2:
             item['city']=locate_list[1]
-        '''
-        item['state']=''
-        item['city']=''
+        
+        #item['state']=''
+        #item['city']=''
         yield item
 
 
